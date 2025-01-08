@@ -18,7 +18,7 @@ export const signup = async (req: Request, res: Response) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
 
-    const newUser = new User({ email, otp });
+    const newUser = new User({ email, otp ,otpExpiry});
     await newUser.save();
 
     await sendOTP(email, otp);
