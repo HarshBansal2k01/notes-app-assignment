@@ -5,6 +5,8 @@ export interface IUser extends Document {
   otp?: string;
   otpExpiry?: Date;
   isVerified: boolean;
+  name: string;
+  DateOfBirth: Date;
 }
 
 const userSchema: Schema = new Schema({
@@ -12,6 +14,8 @@ const userSchema: Schema = new Schema({
   otp: { type: String },
   otpExpiry: { type: Date },
   isVerified: { type: Boolean, default: false },
+  name: { type: String, required: true },
+  DateOfBirth: { type: Date, required: true },
 });
 
 export default mongoose.model<IUser>("User", userSchema);

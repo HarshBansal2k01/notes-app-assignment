@@ -12,7 +12,8 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const signup = (email: string) => api.post("auth/signup", { email });
+export const signup = (email: string, name: string, DateOfBirth: Date) =>
+  api.post("auth/signup", { email, name, DateOfBirth });
 export const verifyOtp = (email: string, otp: string) =>
   api.post("auth/verify-otp", { email, otp });
 export const login = (email: string) => api.post("auth/login", { email });
@@ -24,6 +25,7 @@ export const createNote = (title: string, content: string) =>
   api.post("notes/", { title, content });
 
 export const fetchNotes = () => api.get("notes/");
+export const fetchUser = () => api.get("notes/getuser");
 
 export const updateNote = (id: string, title: string, content: string) =>
   api.put(`notes/${id}`, { title, content });

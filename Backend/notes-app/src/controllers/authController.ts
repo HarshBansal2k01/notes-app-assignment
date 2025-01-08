@@ -5,8 +5,8 @@ import User from "../models/user";
 import { sendOTP } from "../utils/email";
 
 export const signup = async (req: Request, res: Response) => {
-  const { email } = req.body;
-  if (!email) {
+  const { email, DateOfBirth, name } = req.body;
+  if (!email || !name || !DateOfBirth) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -18,7 +18,7 @@ export const signup = async (req: Request, res: Response) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
 
-    const newUser = new User({ email, otp ,otpExpiry});
+    const newUser = new User({ email, otp, otpExpiry, name, DateOfBirth });
     await newUser.save();
 
     await sendOTP(email, otp);
@@ -38,7 +38,7 @@ export const signup = async (req: Request, res: Response) => {
 export const verifyOtp = async (req: Request, res: Response) => {
   const { email, otp } = req.body;
   if (!email || !otp) {
-    return res.status(400).json({ message: "Email and OTP are required" });
+    return res.status(400).json({ message: "OTP is required" });
   }
 
   try {
@@ -105,12 +105,11 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-
 export const completeLogin = async (req: Request, res: Response) => {
   const { email, otp } = req.body;
 
   if (!email || !otp) {
-    return res.status(400).json({ message: "Email and OTP are required" });
+    return res.status(400).json({ message: "OTP is required" });
   }
 
   try {

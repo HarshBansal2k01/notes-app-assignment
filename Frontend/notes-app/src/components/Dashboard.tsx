@@ -4,6 +4,7 @@ import {
   fetchNotes,
   updateNote,
   deleteNote,
+  fetchUser,
 } from "../services/api";
 
 interface Note {
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [user, setUser] = useState<string | null>(null);
 
   const loadNotes = async () => {
     try {
@@ -23,6 +25,15 @@ const Dashboard = () => {
       setNotes(response.data);
     } catch (error) {
       console.error("Error fetching notes:", error);
+    }
+  };
+  const loadUser = async () => {
+    try {
+      const response = await fetchUser();
+      console.log(response.data);
+      setUser(response.data.email);
+    } catch (error) {
+      console.error("Error fetching user:", error);
     }
   };
 
@@ -51,13 +62,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadNotes();
+    loadUser();
   }, []);
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Notes Dashboard</h1>
-      <div className="container">
-        {}
-      </div>
+      <div className="container">{user}</div>
       <div className="mb-4">
         <input
           type="text"
