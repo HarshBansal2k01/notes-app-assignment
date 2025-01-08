@@ -22,6 +22,7 @@ export const SignUp = () => {
       const response = await verifyOtp(email, otp);
       alert("Account verified successfully!");
       setMessage(response.data.message);
+      window.location.href = "/login";
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
     }
