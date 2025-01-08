@@ -3,6 +3,14 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:5000/api/", // Your backend API URL
 });
+// Add a request interceptor to include the token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export const signup = (email: string) => api.post("auth/signup", { email });
 export const verifyOtp = (email: string, otp: string) =>
@@ -10,5 +18,16 @@ export const verifyOtp = (email: string, otp: string) =>
 export const login = (email: string) => api.post("auth/login", { email });
 export const completeLogin = (email: string, otp: string) =>
   api.post("auth/complete-login", { email, otp });
+
+// Notes APIs
+export const createNote = (title: string, content: string) =>
+  api.post("notes/", { title, content });
+
+export const fetchNotes = () => api.get("notes/");
+
+export const updateNote = (id: string, title: string, content: string) =>
+  api.put(`notes/${id}`, { title, content });
+
+export const deleteNote = (id: string) => api.delete(`notes/${id}`);
 
 export default api;
