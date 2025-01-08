@@ -12,12 +12,14 @@ interface Note {
   title: string;
   content: string;
 }
+
 const Dashboard = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [user, setUser] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const loadNotes = async () => {
     try {
@@ -31,7 +33,8 @@ const Dashboard = () => {
     try {
       const response = await fetchUser();
       console.log(response.data);
-      setUser(response.data.email);
+      setName(response.data.name);
+      setEmail(response.data.email);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
@@ -67,7 +70,17 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Notes Dashboard</h1>
-      <div className="container">{user}</div>
+      <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 mb-3">
+        <>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
+            {`Welcome, ${name} !`}
+          </h5>
+          <p className="font-normal text-gray-700 dark:text-gray-400">
+            {`Email: ${email}`}
+          </p>
+        </>
+      </div>
+
       <div className="mb-4">
         <input
           type="text"
