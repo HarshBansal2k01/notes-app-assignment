@@ -50,7 +50,8 @@ const Login = () => {
       const response = await completeLogin(email, otp);
       localStorage.setItem("token", response.data.token);
       setMessage("Login successful");
-      window.location.href = "/dashboard";
+      window.location.href =
+        "https://notes-app-assignment-git-master-harshbansal2k01s-projects.vercel.app/dashboard";
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
     }
