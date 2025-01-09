@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { createNote, fetchNotes, deleteNote, fetchUser } from "../services/api";
 import DashboardModal from "./DashboardModal";
 import ListModal from "./ListModal";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 
 interface Note {
   _id: string;

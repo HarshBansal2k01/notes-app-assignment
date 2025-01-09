@@ -6,7 +6,7 @@ import { IconButton, InputAdornment, Checkbox } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { login, completeLogin } from "../services/api";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");

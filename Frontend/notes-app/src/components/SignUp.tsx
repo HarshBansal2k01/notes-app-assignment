@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import logo from "../../public/logo.svg"
+import logo from "../assets/logo.svg";
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -58,7 +58,7 @@ export const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 px-4">
-       <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-6">
         <img src={logo} alt="Logo" className="h-8 w-8" />
         <div className="text-2xl sm:text-lg lg:text-2xl font-bold">HD</div>
       </div>{" "}
