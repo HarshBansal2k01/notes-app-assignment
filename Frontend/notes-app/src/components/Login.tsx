@@ -5,7 +5,8 @@ import TextField from "@mui/material/TextField";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { login, completeLogin } from "../services/api";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import logo from "../../public/logo.svg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -56,6 +57,10 @@ const Login = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 px-4">
+      <div className="flex items-center gap-2 mb-6">
+        <img src={logo} alt="Logo" className="h-8 w-8" />
+        <div className="text-2xl sm:text-lg lg:text-2xl font-bold">HD</div>
+      </div>{" "}
       <h1 className="text-2xl font-bold mb-3">Login</h1>
       <p className="text-sm mb-2 text-gray-500">
         Please login to continue to your account
@@ -141,41 +146,7 @@ const Login = () => {
             touched.otp && !otp && step !== "email" ? "OTP is required" : ""
           }
         />
-        {/* {step === "email" && (
-        <div>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="p-2 border rounded mb-4"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleLogin}
-          >
-            Send OTP
-          </button>
-        </div>
-      )} */}
 
-        {/* {step === "otp" && (
-        <div>
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            className="p-2 border rounded mb-4"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleCompleteLogin}
-          >
-            Verify OTP
-          </button>
-        </div>
-      )} */}
         <button
           className={`bg-blue-500 text-white w-full sm:w-64 md:w-80 lg:w-96 py-2 mt-3 rounded ${
             step === "email" ? "" : "hover:bg-blue-600"
@@ -184,6 +155,14 @@ const Login = () => {
         >
           {step === "email" ? "Send OTP" : "Verify OTP"}
         </button>
+        <div className="mt-4 text-center">
+          <p>
+            Don't have an account?{" "}
+            <Link to="/signup">
+              <span className="text-blue-600 hover:underline">Sign Up</span>
+            </Link>
+          </p>
+        </div>
         {message && (
           <p className="mt-4 text-red-500 text-sm font-medium bg-red-100 p-3 rounded">
             {message}

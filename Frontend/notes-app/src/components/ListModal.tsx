@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  IconButton,
-  Checkbox,
-  Card,
-} from "@mui/material";
+import { Box, Grid, Typography, IconButton, Card } from "@mui/material";
 import { styled } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateIcon from "@mui/icons-material/Update";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -22,23 +14,14 @@ const Demo = styled("div")(({ theme }) => ({
 interface Note {
   _id: string;
   title: string;
-  completed: boolean;
-  content:string;
 }
 
 interface ListModalProps {
   notes: Note[];
   onDelete: (_id: string) => void;
-  onUpdate: (_id: string) => void;
-  onToggleComplete: (_id: string) => void;
 }
 
-const ListModal: React.FC<ListModalProps> = ({
-  notes,
-  onDelete,
-  onUpdate,
-  onToggleComplete,
-}) => {
+const ListModal: React.FC<ListModalProps> = ({ notes, onDelete }) => {
   return (
     <Box
       sx={{
@@ -62,12 +45,12 @@ const ListModal: React.FC<ListModalProps> = ({
                 <Card
                   key={note._id}
                   sx={{
-                    mb: 2, // Margin bottom to separate cards
+                    mb: 2,
 
                     minHeight: "35px",
-                    padding: "1px 5px", // Padding inside the card
-                    borderRadius: 2, // Rounded corners
-                    boxShadow: 1, // Add shadow for a card effect
+                    padding: "1px 5px",
+                    borderRadius: 2,
+                    boxShadow: 1,
                   }}
                 >
                   <ListItem
@@ -79,13 +62,6 @@ const ListModal: React.FC<ListModalProps> = ({
                       <Box sx={{ display: "flex", gap: 1 }}>
                         <IconButton
                           edge="end"
-                          aria-label="update"
-                          onClick={() => onUpdate(note._id)}
-                        >
-                          <UpdateIcon />
-                        </IconButton>
-                        <IconButton
-                          edge="end"
                           aria-label="delete"
                           onClick={() => onDelete(note._id)}
                         >
@@ -94,38 +70,7 @@ const ListModal: React.FC<ListModalProps> = ({
                       </Box>
                     }
                   >
-                    <Checkbox
-                      edge="start"
-                      checked={note.completed}
-                      sx={{
-                        marginTop: -2
-                      }}
-                      onChange={() => onToggleComplete(note._id)}
-                    />
-                    <ListItemText
-                      primary={
-                        <span
-                          style={{
-                            textDecoration: note.completed
-                              ? "line-through"
-                              : "none",
-                          }}
-                        >
-                          {note.title}
-                        </span>
-                      }
-                      secondary={
-                        <span
-                          style={{
-                            textDecoration: note.completed
-                              ? "line-through"
-                              : "none",
-                          }}
-                        >
-                          {note.content.length > 10 ? note.content.slice(0,10) + "..." : note.content}
-                        </span>
-                      }
-                    />
+                    <ListItemText primary={<span>{note.title}</span>} />
                   </ListItem>
                 </Card>
               ))}

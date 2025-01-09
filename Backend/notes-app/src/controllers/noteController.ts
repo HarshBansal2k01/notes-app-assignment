@@ -3,18 +3,17 @@ import Note, { INote } from "../models/note";
 import User from "../models/user";
 
 export const createNote = async (req: Request, res: Response) => {
-  const { title, content } = req.body;
+  const { title } = req.body;
   const userId = (req as any).user.id;
 
-  if (!title || !content) {
-    return res.status(400).json({ message: "Title and content are required" });
+  if (!title) {
+    return res.status(400).json({ message: "Title is required" });
   }
 
   try {
     const note: INote = new Note({
       userId,
       title,
-      content,
     });
 
     await note.save();
@@ -62,26 +61,7 @@ export const getUser = async (req: Request, res: Response) => {
       .json({ message: "Error fetching user", error: errorMessage });
   }
 };
-export const updateNote = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { title, content } = req.body;
 
-  try {
-    const updatedNote = await Note.findByIdAndUpdate(
-      id,
-      { title, content },
-      { new: true }
-    );
-
-    if (!updatedNote) {
-      return res.status(404).json({ message: "Note not found" });
-    }
-
-    res.status(200).json(updatedNote);
-  } catch (error) {
-    res.status(500).json({ message: "Error updating note", error });
-  }
-};
 export const deleteNote = async (req: Request, res: Response) => {
   const { id } = req.params;
   const userId = (req as any).user.id;

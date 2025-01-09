@@ -9,7 +9,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    // Redirect to login if no token is found
     return (
       <Navigate to="/" replace state={{ message: "Please log in first" }} />
     );

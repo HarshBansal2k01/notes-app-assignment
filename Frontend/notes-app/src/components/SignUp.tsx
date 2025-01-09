@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import logo from "../../public/logo.svg"
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -46,9 +47,10 @@ export const SignUp = () => {
     e.preventDefault();
     try {
       const response = await verifyOtp(email, otp);
-      alert("Account verified successfully!");
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
       setMessage(response.data.message);
-      window.location.href = "/";
+      window.location.href = "/dashboard";
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
     }
@@ -56,6 +58,10 @@ export const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 px-4">
+       <div className="flex items-center gap-2 mb-6">
+        <img src={logo} alt="Logo" className="h-8 w-8" />
+        <div className="text-2xl sm:text-lg lg:text-2xl font-bold">HD</div>
+      </div>{" "}
       <h1 className="text-3xl font-bold mb-3">Sign Up</h1>
       <p className="text-sm mb-2 text-gray-500">
         Sign up to enjoy the features of HD
@@ -192,7 +198,7 @@ export const SignUp = () => {
           <div className="mt-4 text-center">
             <p>
               Already have an account?{" "}
-              <Link to="/login">
+              <Link to="/">
                 <span className="text-blue-600 hover:underline">Sign In</span>
               </Link>
             </p>

@@ -22,6 +22,7 @@ export const signup = async (req: Request, res: Response) => {
     await newUser.save();
 
     await sendOTP(email, otp);
+
     res.status(201).json({
       message: "User registered. Verify OTP to activate your account.",
     });
@@ -56,8 +57,10 @@ export const verifyOtp = async (req: Request, res: Response) => {
     user.otp = undefined;
     user.otpExpiry = undefined;
     await user.save();
-
-    res.status(200).json({ message: "Account verified successfully" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+      expiresIn: "1h",
+    });
+    res.status(200).json({ message: "Account verified successfully", token });
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
