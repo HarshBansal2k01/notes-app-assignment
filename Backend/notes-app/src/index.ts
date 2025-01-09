@@ -16,7 +16,12 @@ const app: Application = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://notes-app-assignment-harshbansal2k01s-projects.vercel.app/",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
