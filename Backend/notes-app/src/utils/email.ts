@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
 
 export const sendOTP = async (email: string, otp: string) => {
-  console.log(process.env.SMTP_USER)
-  console.log(process.env.SMTP_PASS)
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -22,9 +20,7 @@ export const sendOTP = async (email: string, otp: string) => {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log(`OTP sent to ${email}`);
   } catch (error) {
-    console.error("Error sending email:", error);
     throw new Error("Failed to send OTP");
   }
 };
