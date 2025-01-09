@@ -16,13 +16,7 @@ const app: Application = express();
 connectDB();
 
 // Middleware
-app.use(
-  cors({
-    origin:
-      "https://notes-app-assignment-git-master-harshbansal2k01s-projects.vercel.app/",
-    methods: "GET,POST,DELETE",
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
