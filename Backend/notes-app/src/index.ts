@@ -19,7 +19,8 @@ connectDB();
 app.use(
   cors({
     origin:
-      "https://notes-app-assignment-harshbansal2k01s-projects.vercel.app/",
+      "https://notes-app-assignment-git-master-harshbansal2k01s-projects.vercel.app/",
+    methods: "GET,POST,DELETE",
   })
 );
 app.use(bodyParser.json());
