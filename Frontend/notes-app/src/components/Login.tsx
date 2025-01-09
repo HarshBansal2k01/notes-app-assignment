@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { IconButton, InputAdornment, Checkbox } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { login, completeLogin } from "../services/api";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ const Login = () => {
     otp: false,
   });
   const location = useLocation();
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Check if there's a message from redirection
@@ -50,8 +51,9 @@ const Login = () => {
       const response = await completeLogin(email, otp);
       localStorage.setItem("token", response.data.token);
       setMessage("Login successful");
-      window.location.href =
-        "https://notes-app-assignment-git-master-harshbansal2k01s-projects.vercel.app/dashboard";
+      // window.location.href = "/dashboard";
+      // <Link to="/dashboard" />
+      navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
     }

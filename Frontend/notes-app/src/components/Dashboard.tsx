@@ -3,6 +3,7 @@ import { createNote, fetchNotes, deleteNote, fetchUser } from "../services/api";
 import DashboardModal from "./DashboardModal";
 import ListModal from "./ListModal";
 import logo from "../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 interface Note {
   _id: string;
@@ -17,7 +18,7 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
   const loadNotes = async () => {
     try {
       const response = await fetchNotes();
@@ -65,7 +66,9 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+
+    navigate("/");
+    // window.location.href = "/";
   };
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { signup, verifyOtp } from "../services/api";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import logo from "../assets/logo.svg";
@@ -20,6 +20,7 @@ export const SignUp = () => {
     email: false,
     otp: false,
   });
+  const navigate = useNavigate();
 
   const handleBlur = (field: string) => {
     setTouched({ ...touched, [field]: true });
@@ -50,12 +51,12 @@ export const SignUp = () => {
       console.log(response);
       localStorage.setItem("token", response.data.token);
       setMessage(response.data.message);
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
+      navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
     }
   };
-
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 px-4">
       <div className="flex items-center gap-2 mb-6">
