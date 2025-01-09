@@ -21,7 +21,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if there's a message from redirection
     if (location.state && location.state.message) {
       setMessage(location.state.message);
     }
@@ -92,13 +91,11 @@ const Login = () => {
           InputProps={{ sx: { height: 40 } }}
           InputLabelProps={{
             sx: {
-              // Adjust the margin for when the label is not focused or filled
               "&.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
                 marginTop: "-5px",
               },
-              // Optional: Additional styling for focused state
               "&.Mui-focused": {
-                marginTop: "0px", // Adjust as necessary for the focused state
+                marginTop: "0px", 
               },
             },
           }}
@@ -133,13 +130,11 @@ const Login = () => {
           }}
           InputLabelProps={{
             sx: {
-              // Adjust the margin for when the label is not focused or filled
               "&.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
                 marginTop: "-5px",
               },
-              // Optional: Additional styling for focused state
               "&.Mui-focused": {
-                marginTop: "0px", // Adjust as necessary for the focused state
+                marginTop: "0px", 
               },
             },
           }}

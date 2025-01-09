@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://notes-app-backend-i50f.onrender.com/api/", // Your backend API URL
+  baseURL: "https://notes-app-backend-i50f.onrender.com/api/", 
  
 });
 // Add a request interceptor to include the token
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+  const token = localStorage.getItem("token"); 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

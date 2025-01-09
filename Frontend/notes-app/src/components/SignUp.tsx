@@ -90,13 +90,11 @@ export const SignUp = () => {
             InputProps={{ sx: { height: 40 } }}
             InputLabelProps={{
               sx: {
-                // Adjust the margin for when the label is not focused or filled
                 "&.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
                   marginTop: "-5px",
                 },
-                // Optional: Additional styling for focused state
                 "&.Mui-focused": {
-                  marginTop: "0px", // Adjust as necessary for the focused state
+                  marginTop: "0px",
                 },
               },
             }}
@@ -133,13 +131,11 @@ export const SignUp = () => {
             InputProps={{ sx: { height: 40 } }}
             InputLabelProps={{
               sx: {
-                // Adjust the margin for when the label is not focused or filled
                 "&.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
                   marginTop: "-5px",
                 },
-                // Optional: Additional styling for focused state
                 "&.Mui-focused": {
-                  marginTop: "0px", // Adjust as necessary for the focused state
+                  marginTop: "0px",
                 },
               },
             }}
@@ -173,13 +169,11 @@ export const SignUp = () => {
             }}
             InputLabelProps={{
               sx: {
-                // Adjust the margin for when the label is not focused or filled
                 "&.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
                   marginTop: "-5px",
                 },
-                // Optional: Additional styling for focused state
                 "&.Mui-focused": {
-                  marginTop: "0px", // Adjust as necessary for the focused state
+                  marginTop: "0px",
                 },
               },
             }}

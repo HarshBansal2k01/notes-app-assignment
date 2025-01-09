@@ -47,7 +47,7 @@ export const signup = async (req: Request, res: Response) => {
     await sendOTP(email, otp);
 
     res.status(201).json({
-      message: "User registered. Verify OTP to activate your account.",
+      message: "Verify OTP to activate your account.",
     });
   } catch (error) {
     const errorMessage =

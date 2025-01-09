@@ -5,18 +5,18 @@ export const sendOTP = async (email: string, otp: string) => {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT!, 10),
-      secure: false, // true for 465, false for other ports
+      secure: false,
       auth: {
-        user: process.env.SMTP_USER, // your email
-        pass: process.env.SMTP_PASS, // your email password
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
     const mailOptions = {
-      from: `"Notes App" <${process.env.SMTP_USER}>`, // sender address
-      to: email, // list of receivers
-      subject: "Your OTP Code", // Subject line
-      text: `Your OTP code is: ${otp}`, // plain text body
+      from: `"Notes App" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: "Your OTP Code",
+      text: `Your OTP code is: ${otp}`,
     };
 
     await transporter.sendMail(mailOptions);
