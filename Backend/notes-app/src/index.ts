@@ -19,7 +19,7 @@ connectDB();
 app.use(
   cors({
     origin:
-      "https://notes-app-assignment-n4xbsnl96-harshbansal2k01s-projects.vercel.app/",
+      "https://notes-app-assignment-harshbansal2k01s-projects.vercel.app/",
   })
 );
 app.use(bodyParser.json());
