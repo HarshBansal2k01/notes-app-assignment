@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface DashboardModalProps {
   isOpen: boolean;
@@ -48,11 +48,11 @@ const DashboardModal: React.FC<DashboardModalProps> = ({
             Save
           </button>
         </div>
-      {message && (
-        <p className="mt-4 text-red-500 text-sm font-medium bg-red-100 p-3 rounded">
-          {message}
-        </p>
-      )}
+        {message && (
+          <p className="mt-4 text-red-500 text-sm font-medium bg-red-100 p-3 rounded">
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );
