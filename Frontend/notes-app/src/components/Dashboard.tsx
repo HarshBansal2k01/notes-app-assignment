@@ -7,11 +7,13 @@ import {
   fetchUser,
 } from "../services/api";
 import DashboardModal from "./DashboardModal";
+import ListModal from "./ListModal";
 
 interface Note {
   _id: string;
   title: string;
   content: string;
+  completed: boolean;
 }
 
 const Dashboard = () => {
@@ -78,7 +80,18 @@ const Dashboard = () => {
       console.error("Error deleting note:", error);
     }
   };
+  const handleToggleComplete = (id: string) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note._id === id ? { ...note, completed: !note.completed } : note
+      )
+    );
+  };
 
+  useEffect(() => {
+    loadNotes();
+    loadUser();
+  }, []);
   useEffect(() => {
     loadNotes();
     loadUser();
@@ -98,25 +111,6 @@ const Dashboard = () => {
       </div>
 
       <div className="mb-4">
-        {/* <input
-          type="text"
-          placeholder="Title"
-          className="p-2 border rounded mb-2 w-full"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Content"
-          className="p-2 border rounded w-full"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea> */}
-        {/* <button
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-          onClick={handleSaveNote}
-        >
-          {editingId ? "Update Note" : "Add Note"}
-        </button> */}
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
           onClick={() => {
@@ -141,7 +135,13 @@ const Dashboard = () => {
         />
       )}
 
-      <div>
+      <ListModal
+        notes={notes}
+        onDelete={handleDelete}
+        onUpdate={(id) => handleEdit(notes.find((note) => note._id === id)!)}
+        onToggleComplete={handleToggleComplete}
+      />
+      {/* <div>
         {notes.map((note) => (
           <div
             key={note._id}
@@ -167,7 +167,7 @@ const Dashboard = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
