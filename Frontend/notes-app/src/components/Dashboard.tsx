@@ -6,6 +6,7 @@ import {
   deleteNote,
   fetchUser,
 } from "../services/api";
+import DashboardModal from "./DashboardModal";
 
 interface Note {
   _id: string;
@@ -14,6 +15,7 @@ interface Note {
 }
 
 const Dashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -41,26 +43,40 @@ const Dashboard = () => {
   };
 
   const handleSaveNote = async () => {
-    if (editingId) {
-      await updateNote(editingId, title, content);
-      setEditingId(null);
-    } else {
-      await createNote(title, content);
+    if (!title || !content) {
+      alert("Title and content are mandatory!");
+      return;
     }
-    setTitle("");
-    setContent("");
-    loadNotes();
+    try {
+      if (editingId) {
+        await updateNote(editingId, title, content);
+        setEditingId(null);
+      } else {
+        await createNote(title, content);
+      }
+      setTitle("");
+      setContent("");
+      setIsModalOpen(false);
+      loadNotes();
+    } catch (error) {
+      console.error("Error saving note:", error);
+    }
   };
 
   const handleEdit = (note: Note) => {
     setTitle(note.title);
     setContent(note.content);
     setEditingId(note._id);
+    setIsModalOpen(true);
   };
 
   const handleDelete = async (id: string) => {
-    await deleteNote(id);
-    loadNotes();
+    try {
+      await deleteNote(id);
+      loadNotes();
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
   };
 
   useEffect(() => {
@@ -82,7 +98,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mb-4">
-        <input
+        {/* <input
           type="text"
           placeholder="Title"
           className="p-2 border rounded mb-2 w-full"
@@ -94,14 +110,36 @@ const Dashboard = () => {
           className="p-2 border rounded w-full"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <button
+        ></textarea> */}
+        {/* <button
           className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
           onClick={handleSaveNote}
         >
           {editingId ? "Update Note" : "Add Note"}
+        </button> */}
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+          onClick={() => {
+            setTitle("");
+            setContent("");
+            setEditingId(null);
+            setIsModalOpen(true);
+          }}
+        >
+          Add Note
         </button>
       </div>
+      {isModalOpen && (
+        <DashboardModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={title}
+          content={content}
+          onTitleChange={(value) => setTitle(value)}
+          onContentChange={(value) => setContent(value)}
+          onSave={handleSaveNote}
+        />
+      )}
 
       <div>
         {notes.map((note) => (

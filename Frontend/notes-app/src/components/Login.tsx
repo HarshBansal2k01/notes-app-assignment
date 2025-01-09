@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { login, completeLogin } from "../services/api";
+import { useLocation } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -16,6 +16,14 @@ const Login = () => {
     email: false,
     otp: false,
   });
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if there's a message from redirection
+    if (location.state && location.state.message) {
+      setMessage(location.state.message);
+    }
+  }, [location]);
 
   const handleBlur = (field: string) => {
     setTouched({ ...touched, [field]: true });
