@@ -16,6 +16,7 @@ const Dashboard = () => {
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const loadNotes = async () => {
     try {
@@ -38,7 +39,7 @@ const Dashboard = () => {
 
   const handleSaveNote = async () => {
     if (!title) {
-      alert("Title is mandatory!");
+      setMessage("Please Enter Your Note");
       return;
     }
     try {
@@ -61,7 +62,6 @@ const Dashboard = () => {
       console.error("Error deleting note:", error);
     }
   };
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -86,7 +86,7 @@ const Dashboard = () => {
           </div>
         </div>
         <p
-          className="text-sm sm:text-base text-blue-900 font-bold underline cursor-pointer"
+          className="text-sm sm:text-base text-blue-600 font-bold underline cursor-pointer"
           onClick={handleLogout}
         >
           Sign Out
@@ -110,7 +110,7 @@ const Dashboard = () => {
               setIsModalOpen(true);
             }}
           >
-            Add Note
+            Create Note
           </button>
         </div>
 
@@ -121,14 +121,12 @@ const Dashboard = () => {
             title={title}
             onTitleChange={(value) => setTitle(value)}
             onSave={handleSaveNote}
+            message={message}
           />
         )}
 
         <div className="w-96">
-          <ListModal
-            notes={notes}
-            onDelete={handleDelete}
-          />
+          <ListModal notes={notes} onDelete={handleDelete} />
         </div>
       </div>
     </>

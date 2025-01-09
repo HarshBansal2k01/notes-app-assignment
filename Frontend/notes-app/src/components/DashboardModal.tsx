@@ -6,6 +6,7 @@ interface DashboardModalProps {
   title: string;
   onTitleChange: (value: string) => void;
   onSave: () => void;
+  message: string;
 }
 
 const DashboardModal: React.FC<DashboardModalProps> = ({
@@ -14,6 +15,7 @@ const DashboardModal: React.FC<DashboardModalProps> = ({
   title,
   onTitleChange,
   onSave,
+  message,
 }) => {
   if (!isOpen) return null;
 
@@ -46,6 +48,11 @@ const DashboardModal: React.FC<DashboardModalProps> = ({
             Save
           </button>
         </div>
+      {message && (
+        <p className="mt-4 text-red-500 text-sm font-medium bg-red-100 p-3 rounded">
+          {message}
+        </p>
+      )}
       </div>
     </div>
   );

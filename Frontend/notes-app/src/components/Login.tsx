@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment, Checkbox } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { login, completeLogin } from "../services/api";
 import { Link, useLocation } from "react-router-dom";
@@ -61,7 +61,7 @@ const Login = () => {
         <img src={logo} alt="Logo" className="h-8 w-8" />
         <div className="text-2xl sm:text-lg lg:text-2xl font-bold">HD</div>
       </div>{" "}
-      <h1 className="text-2xl font-bold mb-3">Login</h1>
+      <h1 className="text-2xl font-bold mb-3">Sign In</h1>
       <p className="text-sm mb-2 text-gray-500">
         Please login to continue to your account
       </p>
@@ -146,6 +146,15 @@ const Login = () => {
             touched.otp && !otp && step !== "email" ? "OTP is required" : ""
           }
         />
+        <div className="w-full text-left">
+          <div className="flex items-center gap-1 mb-2 -ml-3">
+            <Checkbox />
+            <p className="text-gray-700">Keep me logged in</p>
+          </div>
+          <p className="text-blue-500 underline cursor-pointer">
+            Forgot Password?
+          </p>
+        </div>
 
         <button
           className={`bg-blue-500 text-white w-full sm:w-64 md:w-80 lg:w-96 py-2 mt-3 rounded ${
@@ -159,7 +168,7 @@ const Login = () => {
           <p>
             Don't have an account?{" "}
             <Link to="/signup">
-              <span className="text-blue-600 hover:underline">Sign Up</span>
+              <span className="text-blue-600 underline">Sign Up</span>
             </Link>
           </p>
         </div>

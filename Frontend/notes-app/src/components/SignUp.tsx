@@ -199,7 +199,7 @@ export const SignUp = () => {
             <p>
               Already have an account?{" "}
               <Link to="/">
-                <span className="text-blue-600 hover:underline">Sign In</span>
+                <span className="text-blue-600  underline">Sign In</span>
               </Link>
             </p>
           </div>
