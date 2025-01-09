@@ -68,7 +68,6 @@ const Dashboard = () => {
     localStorage.removeItem("token");
 
     navigate("/");
-    // window.location.href = "/";
   };
 
   useEffect(() => {

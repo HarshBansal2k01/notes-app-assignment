@@ -2,6 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://notes-app-backend-i50f.onrender.com/api/", // Your backend API URL
+ 
 });
 // Add a request interceptor to include the token
 api.interceptors.request.use((config) => {

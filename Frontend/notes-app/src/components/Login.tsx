@@ -18,7 +18,7 @@ const Login = () => {
     otp: false,
   });
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if there's a message from redirection
@@ -51,8 +51,7 @@ const Login = () => {
       const response = await completeLogin(email, otp);
       localStorage.setItem("token", response.data.token);
       setMessage("Login successful");
-      // window.location.href = "/dashboard";
-      // <Link to="/dashboard" />
+
       navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");

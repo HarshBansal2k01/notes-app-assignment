@@ -40,6 +40,7 @@ export const SignUp = () => {
       setMessage(response.data.message);
       setStep("otp");
     } catch (error: any) {
+      console.log(error);
       setMessage(error.response?.data?.message || "Signup failed");
     }
   };
@@ -51,7 +52,6 @@ export const SignUp = () => {
       console.log(response);
       localStorage.setItem("token", response.data.token);
       setMessage(response.data.message);
-      // window.location.href = "/dashboard";
       navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
