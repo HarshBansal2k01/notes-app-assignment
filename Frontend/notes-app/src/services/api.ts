@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/", // Your backend API URL
+  baseURL: "https://notes-app-backend-i50f.onrender.com/api/", // Your backend API URL
 });
 // Add a request interceptor to include the token
 api.interceptors.request.use((config) => {
@@ -19,7 +19,7 @@ export const verifyOtp = (email: string, otp: string) =>
 export const login = (email: string) => api.post("auth/login", { email });
 export const completeLogin = (email: string, otp: string) =>
   api.post("auth/complete-login", { email, otp });
-export const logout = () => api.post("auth/logout")
+export const logout = () => api.post("auth/logout");
 
 // Notes APIs
 export const createNote = (title: string, content: string) =>
