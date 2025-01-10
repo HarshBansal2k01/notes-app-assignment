@@ -4,7 +4,6 @@ import DashboardModal from "./DashboardModal";
 import ListModal from "./ListModal";
 import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
-import { LocalDining } from "@mui/icons-material";
 
 interface Note {
   _id: string;
