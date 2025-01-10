@@ -14,6 +14,7 @@ export const SignUp = () => {
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [showOtp, setShowOtp] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState({
     name: false,
     dob: false,
@@ -35,6 +36,7 @@ export const SignUp = () => {
       setMessage("Please fill in all required fields");
       return;
     }
+    setLoading(true);
     try {
       const response = await signup(email, name, new Date(dob));
       setMessage(response.data.message);
@@ -42,11 +44,14 @@ export const SignUp = () => {
     } catch (error: any) {
       console.log(error);
       setMessage(error.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleVerifyOtp = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await verifyOtp(email, otp);
       console.log(response);
@@ -55,6 +60,8 @@ export const SignUp = () => {
       navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -183,9 +190,10 @@ export const SignUp = () => {
             }
           />
           <button
-            className={`bg-blue-500 text-white w-full sm:w-64 md:w-80 lg:w-96 py-2 mt-3 rounded ${
+            className={`bg-blue-500 w-full text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition mt-2 ${
               step === "email" ? "" : "hover:bg-blue-600"
             }`}
+            disabled={loading}
             onClick={step === "email" ? handleSignup : handleVerifyOtp}
           >
             {step === "email" ? "Send OTP" : "Verify OTP"}

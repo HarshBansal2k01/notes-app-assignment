@@ -13,6 +13,7 @@ const Login = () => {
   const [step, setStep] = useState<"email" | "otp">("email");
   const [message, setMessage] = useState("");
   const [showOtp, setShowOtp] = useState(false);
+  const [loading,setLoading] = useState(false)
   const [touched, setTouched] = useState({
     email: false,
     otp: false,
@@ -34,18 +35,21 @@ const Login = () => {
   };
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await login(email);
       setMessage(response.data.message);
       setStep("otp");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "Login failed");
+    }finally {
+      setLoading(false);
     }
   };
 
   const handleCompleteLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await completeLogin(email, otp);
       localStorage.setItem("token", response.data.token);
@@ -54,6 +58,8 @@ const Login = () => {
       navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response?.data?.message || "OTP verification failed");
+    }finally{
+      setLoading(false);
     }
   };
   return (
@@ -95,7 +101,7 @@ const Login = () => {
                 marginTop: "-5px",
               },
               "&.Mui-focused": {
-                marginTop: "0px", 
+                marginTop: "0px",
               },
             },
           }}
@@ -134,7 +140,7 @@ const Login = () => {
                 marginTop: "-5px",
               },
               "&.Mui-focused": {
-                marginTop: "0px", 
+                marginTop: "0px",
               },
             },
           }}
@@ -154,9 +160,10 @@ const Login = () => {
         </div>
 
         <button
-          className={`bg-blue-500 text-white w-full sm:w-64 md:w-80 lg:w-96 py-2 mt-3 rounded ${
+          className={`bg-blue-500 w-full text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition mt-2 ${
             step === "email" ? "" : "hover:bg-blue-600"
           }`}
+          disabled={loading}
           onClick={step === "email" ? handleLogin : handleCompleteLogin}
         >
           {step === "email" ? "Send OTP" : "Verify OTP"}

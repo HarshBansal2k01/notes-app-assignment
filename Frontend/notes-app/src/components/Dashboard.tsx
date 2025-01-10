@@ -4,6 +4,7 @@ import DashboardModal from "./DashboardModal";
 import ListModal from "./ListModal";
 import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
+import { LocalDining } from "@mui/icons-material";
 
 interface Note {
   _id: string;
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
   const loadNotes = async () => {
     try {
@@ -43,6 +45,7 @@ const Dashboard = () => {
       setMessage("Please Enter Your Note");
       return;
     }
+    setLoading(true)
     try {
       await createNote(title, content);
 
@@ -52,6 +55,9 @@ const Dashboard = () => {
       loadNotes();
     } catch (error) {
       console.error("Error saving note:", error);
+      setMessage("Failed to save the note. Please try again.");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -124,6 +130,7 @@ const Dashboard = () => {
             onTitleChange={(value) => setTitle(value)}
             onSave={handleSaveNote}
             message={message}
+            loading = {loading}
           />
         )}
 
