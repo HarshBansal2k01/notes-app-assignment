@@ -66,7 +66,8 @@ notes-app-assignment/
    ```
 
 ## Environment Variables
-The backend server requires a `.env` file to store sensitive details such as the database URI and other configuration settings.I have not shared it as it contains sensitive details and URL and also it is a best practise to follow
+The backend server requires a `.env` file to store sensitive details such as the database URI and other configuration settings.
+I have added the .env file so that the project can run
 
 **Example `.env` file:**
 ```
