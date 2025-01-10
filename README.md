@@ -29,6 +29,11 @@ notes-app-assignment/
 
 ## Getting Started
 
+1. **Git Clone**
+   ```bash
+   git clone https://github.com/HarshBansal2k01/notes-app-assignment.git
+   ```
+
 ### Backend Setup
 
 1. **Navigate to the Backend Directory:**
@@ -45,8 +50,6 @@ notes-app-assignment/
    ```bash
    npm run dev
    ```
-
-   *Note: The server may throw errors if the required environment variables are not properly set in the `.env` file.*
 
 ### Frontend Setup
 
